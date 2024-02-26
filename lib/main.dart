@@ -3,6 +3,7 @@ import 'package:e/ikki.dart';
 import 'package:e/qoshish.dart';
 import 'package:e/tugma.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +14,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
   runApp(MaterialApp(
     home: MyApp(),
     debugShowCheckedModeBanner: false,
@@ -33,7 +35,7 @@ class _MyAppState extends State<MyApp> {
   TextEditingController maxsulotaslnarxiEdit = TextEditingController();
 
   CollectionReference pupilsCollection =
-      FirebaseFirestore.instance.collection("pupils");
+  FirebaseFirestore.instance.collection("pupils");
 
   @override
   Widget build(BuildContext context) {
@@ -101,7 +103,7 @@ class _MyAppState extends State<MyApp> {
                                           padding: const EdgeInsets.all(8.0),
                                           child: TextField(
                                             controller:
-                                                maxsulotsotlishnarxiEdit,
+                                            maxsulotsotlishnarxiEdit,
                                             decoration: InputDecoration(
                                                 label: Text(
                                                     "Maxsulot sotlish narxi"),
@@ -114,13 +116,13 @@ class _MyAppState extends State<MyApp> {
                                             controller: maxsulotaslnarxiEdit,
                                             decoration: InputDecoration(
                                                 label:
-                                                    Text("Maxsulot asl narxi"),
+                                                Text("Maxsulot asl narxi"),
                                                 border: OutlineInputBorder()),
                                           ),
                                         ),
                                         Row(
                                           mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                          MainAxisAlignment.spaceBetween,
                                           children: [
                                             TextButton(
                                                 onPressed: () {
@@ -133,14 +135,14 @@ class _MyAppState extends State<MyApp> {
                                                     .doc(document.id)
                                                     .update({
                                                   "Maxsulot nomi":
-                                                      maxsulotnomiEdit.text,
+                                                  maxsulotnomiEdit.text,
                                                   "Maxsulot soni":
-                                                      maxsulotsoniEdit.text,
+                                                  maxsulotsoniEdit.text,
                                                   "Maxsulot sotlish narxi":
-                                                      maxsulotsotlishnarxiEdit
-                                                          .text,
+                                                  maxsulotsotlishnarxiEdit
+                                                      .text,
                                                   "Maxsulot asl narxi":
-                                                      maxsulotaslnarxiEdit.text
+                                                  maxsulotaslnarxiEdit.text
                                                 });
                                                 Navigator.pop(context);
                                                 maxsulotnomiEdit.clear();
@@ -150,15 +152,15 @@ class _MyAppState extends State<MyApp> {
                                                 maxsulotaslnarxiEdit.clear();
                                                 ScaffoldMessenger.of(context)
                                                     .showSnackBar(SnackBar(
-                                                        backgroundColor:
-                                                            Colors.green,
-                                                        content: Text(
-                                                          "O'zgartirildi",
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.white,
-                                                              fontSize: 20),
-                                                        )));
+                                                    backgroundColor:
+                                                    Colors.green,
+                                                    content: Text(
+                                                      "O'zgartirildi",
+                                                      style: TextStyle(
+                                                          color:
+                                                          Colors.white,
+                                                          fontSize: 20),
+                                                    )));
                                               },
                                               child: Text("O'zgartrish"),
                                             )
@@ -208,7 +210,7 @@ class _MyAppState extends State<MyApp> {
                                 ),
                                 Row(
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
+                                  MainAxisAlignment.spaceAround,
                                   children: [
                                     MaterialButton(
                                         onPressed: () {
@@ -233,7 +235,7 @@ class _MyAppState extends State<MyApp> {
                                       },
                                       color: Colors.green,
                                       child: Text(
-                                        "+",
+                                        "Qo'shish",
                                         style: TextStyle(color: Colors.white),
                                       ),
                                     ),
@@ -255,7 +257,7 @@ class _MyAppState extends State<MyApp> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => AddApp()))
+              context, MaterialPageRoute(builder: (context) => AddApp()))
               .then((value) {
             setState(() {});
           });
